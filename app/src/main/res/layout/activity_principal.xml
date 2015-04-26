@@ -46,13 +46,27 @@
             android:textSize="20sp"
             android:textColor="#ffffffff" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView4"
+            android:textSize="12sp"
+            android:singleLine="false" />
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editText"
             android:textSize="20sp"
             android:background="#ffffffff"
-            android:layout_weight="0.08" />
+            android:layout_weight="0.06" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView6"
+            android:textSize="12sp"
+            android:singleLine="false" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -61,6 +75,13 @@
             android:id="@+id/textView2"
             android:textSize="20sp"
             android:textColor="#ffffffff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView5"
+            android:textSize="12sp"
+            android:singleLine="false" />
 
         <EditText
             android:layout_width="match_parent"
@@ -71,45 +92,40 @@
             android:layout_gravity="center_horizontal"
             android:textSize="20sp"
             android:background="#ffffffff"
-            android:layout_weight="0.08" />
+            android:layout_weight="0.06" />
 
-        <TextView
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="97dp"
+        android:gravity="center"
+        android:weightSum="1"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+
+
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView4"
-            android:textSize="30sp"
-            android:singleLine="false" />
+            android:text="@string/save"
+            android:id="@+id/button2"
+            android:textColor="#ffffffff"
+            android:background="#73000000"
+            android:layout_weight="0.34"
+            android:textStyle="bold"
+             />
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="97dp"
-            android:gravity="center"
-            android:weightSum="1">
-
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/save"
-                android:id="@+id/button2"
-                android:textColor="#ffffffff"
-                android:background="#36000000"
-                android:layout_weight="0.34"
-                android:textStyle="bold"
-                 />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/consult"
-                android:id="@+id/button"
-                android:textColor="#ffffffff"
-                android:background="#36000000"
-                android:layout_weight="0.18"
-                android:textStyle="bold" />
-
-        </LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/consult"
+            android:id="@+id/button"
+            android:textColor="#ffffffff"
+            android:background="#73000000"
+            android:layout_weight="0.18"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

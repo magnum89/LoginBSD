@@ -2,8 +2,12 @@ package com.basesdatos.loginbsd.baseDatos;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MiBaseDatos extends SQLiteOpenHelper{
 
@@ -83,5 +87,70 @@ public class MiBaseDatos extends SQLiteOpenHelper{
         db.delete("usuarios", "_id="+id, null);//el nombre de la tabla "table", el registro a borrar "whereClause" como referencia su id
         // y como ultimo parámetro "whereArgs" los valores a borrar.
         db.close();
+    }
+
+    //leer un registro
+    /**Este método devuelve un objeto Usuarios con los datos del usuario (id, usurio, email).
+     En este caso como queremos leer hacemos uso del método "getReadableDatabase()". Creamos una variable
+     "valores_recuperar" con las columnas que queremos recuperar, en este caso vamos a recuperar todos los
+      datos de un registro. Continuamos creando un "Cursor" que se encarga de devolver el resultado de un
+      registro de la tabla y lo almacena en la memoria, le aplicamos el método:
+
+      query(table, columns, selection, selectionArgs, groupBy, having, orderBy, limit)
+
+      Con este método conseguimos leer un registro de la tabla. Como primer parámetro "table" nos pide el
+      nombre de la tabla , "columns" las columnas que queremos recuperar, con "selection" le indicamos el
+      registro a recuperar (en este caso recuperamos con el id), o los registros a recuperar "selectionArgs",
+      "groupBy" para agrupar los registros consultados , "having" es un filtro para incluir los registros en
+       el cursor (este parámetro se usaría con groupBy), "orderBy" para ordenar las filas y "limit" para
+        limitar el numero de filas consultadas.
+
+      Con el método "moveToFirst()" ponemos el cursor al inicio de los datos almacenados. Lo encapsulamos
+       en un if por si acaso no hay datos almacenados.
+
+    Continuamos creando un objeto "Contactos" para almacenar los datos consultados de un registro, y
+    los vamos recuperando del cursor con métodos get indicando la posición de la columna.
+
+    Para terminar debemos cerrar la base de datos y el cursor.
+    */
+
+    public Usuarios recuperarUsuario(int id) {
+        SQLiteDatabase db = getReadableDatabase();
+        String[] valores_recuperar = {"_id", "usuario", "email"};
+        Cursor c = db.query("usuarios", valores_recuperar, "_id=" + id,
+                null, null, null, null, null);
+        if(c != null) {
+            c.moveToFirst();
+        }
+        Usuarios usuario = new Usuarios(c.getInt(0), c.getString(1), c.getString(2));
+        db.close();
+        c.close();
+        return usuario;
+    }
+
+
+    //Leer todos los registro
+    /**El método es muy similar al de leer un registro pero
+     *  en este caso no especificamos que registro queremos recuperar, por lo tanto
+     *  ponemos su parámetro a null. A parte creamos una variable "lista_contactos"
+     *  donde almacenaremos todos los registros de la tabla en objetos contactos.
+     *  En el bucle do-while usamos el método "moveToNext()" como parámetro que se
+     *  encargara de pasar al siguiente registro de la tabla y por lo tanto recorrer
+     *  todos los registros de la tabla.*/
+
+    public List<Usuarios> recuperarCONTACTOS() {
+        SQLiteDatabase db = getReadableDatabase();
+        List<Usuarios> lista_contactos = new ArrayList<Usuarios>();
+        String[] valores_recuperar = {"_id", "usuario", "email"};
+        Cursor c = db.query("usuarios", valores_recuperar,
+                null, null, null, null, null, null);
+        c.moveToFirst();
+        do {
+            Usuarios usuarios = new Usuarios(c.getInt(0), c.getString(1),c.getString(2));
+            lista_contactos.add(usuarios);
+        } while (c.moveToNext());
+        db.close();
+        c.close();
+        return lista_contactos;
     }
 }

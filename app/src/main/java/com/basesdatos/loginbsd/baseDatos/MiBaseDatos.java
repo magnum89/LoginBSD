@@ -43,7 +43,7 @@ public class MiBaseDatos extends SQLiteOpenHelper{
 
     //Insertar registros:
 
-    public void insertarUSUARIO(int id, String usr, int tlf, String email) {//como parámetros los datos que queremos insertar
+    public void insertarUSUARIO(int id, String usr, String email) {//como parámetros los datos que queremos insertar
     // en la tabla (id, usuario email)
         SQLiteDatabase db = getWritableDatabase();//creamos una instancia de la clase "SQLiteDatabase"
         // y usamos su método "getWritableDatabase() para poder escribir en la base de datos"
